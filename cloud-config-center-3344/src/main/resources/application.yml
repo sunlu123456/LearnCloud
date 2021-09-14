@@ -14,9 +14,26 @@ spring:
           - springcloud-config
       ####读取分支
       label: master
+  #rabbitmq相关配置<--------------------------
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 #服务注册到eureka地址
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka
+
+##rabbitmq相关配置,暴露bus刷新配置的端点，Bus动态刷新全局广播配置实现
+#全部通知
+#curl -X POST "http://localhost:3344/actuator/bus-refresh"
+#只通知3355，不通知3366
+#curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
