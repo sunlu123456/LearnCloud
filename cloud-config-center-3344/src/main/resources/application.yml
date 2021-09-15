@@ -8,7 +8,8 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:sunlu123456/springcloud-config.git #GitHub上面的git仓库名字
+          #uri: git@github.com:sunlu123456/springcloud-config.git #GitHub上面的git仓库名字
+          uri: https://github.com/sunlu123456/springcloud-config.git
           ####搜索目录
           search-paths:
           - springcloud-config
@@ -28,10 +29,12 @@ eureka:
       defaultZone: http://localhost:7001/eureka
 
 ##rabbitmq相关配置,暴露bus刷新配置的端点，Bus动态刷新全局广播配置实现
+#在cmd中输入以下命令
 #全部通知
 #curl -X POST "http://localhost:3344/actuator/bus-refresh"
 #只通知3355，不通知3366
-#curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355
+#curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"
+#config-client:3355（客户端服务名:端口）
 management:
   endpoints: #暴露bus刷新配置的端点
     web:

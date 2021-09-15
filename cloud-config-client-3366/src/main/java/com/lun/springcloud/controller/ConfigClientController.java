@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RefreshScope
+@RefreshScope//未配置消息总线情况下，需发送Post请求：curl -X POST "http://localhost:3366/actuator/refresh"
 public class ConfigClientController {
     @Value("${server.port}")
     private String serverPort;
