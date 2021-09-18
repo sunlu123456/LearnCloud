@@ -1,0 +1,30 @@
+server:
+  port: 9011
+
+spring:
+  application:
+    name: nacos-payment-provider
+  profiles:
+    active: dev # 表示开发环境
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
+      config:
+        server-addr: localhost:8848 #Nacos作为配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEV_GROUP
+        namespace: 8b04b181-5593-4b4f-84bb-c62f900f33d5
+
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# nacos-payment-provider-dev.yaml
+
+#  Nacos支持AP和CP模式的切换
+#  切换命令：
+#  curl -X PUT '$NACOS_SERVER:8848/nacos/v1/ns/operator/switches?entry=serverMode&value=CP
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

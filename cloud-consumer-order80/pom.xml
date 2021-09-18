@@ -18,7 +18,7 @@
     </properties>
 
     <dependencies>
-        <!--包含了sleuth+zipkin-->
+        <!--链路跟踪，包含了sleuth+zipkin-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
