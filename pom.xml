@@ -32,6 +32,7 @@
         <module>cloud-nacos-provider-payment9001</module>
         <module>cloud-nacos-consumer-order83</module>
         <module>cloud-nacos-provider-payment9011</module>
+        <module>cloudalibaba-sentinel-service8401</module>
     </modules>
     <packaging>pom</packaging><!-- 这里添加，注意不是jar或war -->
 

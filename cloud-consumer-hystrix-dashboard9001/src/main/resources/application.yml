@@ -1,2 +1,5 @@
 server:
   port: 9001
+
+#演示微服务：cloud-provider-hystrix-payment8001
+#在主启动类中注入了servlet bean
