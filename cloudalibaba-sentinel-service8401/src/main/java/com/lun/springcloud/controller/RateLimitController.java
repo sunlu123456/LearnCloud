@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * @SentinelResource 注解
  * 注意：注解方式埋点不支持 private 方法。
+ * blockHandler 函数访问范围需要是 public，返回类型需要与原方法相匹配，
+ * 参数类型需要和原方法相匹配并且最后加一个额外的参数，类型为 BlockException
  */
 @RestController
 public class RateLimitController {
