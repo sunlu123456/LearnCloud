@@ -143,7 +143,7 @@ public class FlowLimitController {
     @SentinelResource(value = "testHotKey",blockHandler/*兜底方法*/ = "deal_testHotKey")
     public String testHotKey(@RequestParam(value = "p1",required = false) String p1,
                              @RequestParam(value = "p2",required = false) String p2) {
-        int age = 10/0;//@SentinelResource主管配置出错，运行出错该走异常走异常。经测试Sentinel 1.8.0以后走兜底方法。
+        int age = 10/0;//@SentinelResource主管配置出错，运行出错该走异常。但如果触发了sentinel配置的规则还是走兜底方法。
         return "------testHotKey";
     }
 

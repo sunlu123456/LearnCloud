@@ -12,7 +12,8 @@
     <artifactId>cloudalibaba-sentinel-service8401</artifactId>
 
     <dependencies>
-        <dependency><!-- 引入自己定义的api通用包，可以使用Payment支付Entity -->
+        <!-- 引入自己定义的api通用包，可以使用Payment支付Entity -->
+        <dependency>
             <groupId>com.lun.springcloud</groupId>
             <artifactId>cloud-api-commons</artifactId>
             <version>${project.version}</version>
@@ -45,12 +46,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- 引入自己定义的api通用包，可以使用Payment支付Entity -->
-        <dependency>
-            <groupId>com.lun.springcloud</groupId>
-            <artifactId>cloud-api-commons</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <!-- SpringBoot整合Web组件+actuator -->
         <dependency>
