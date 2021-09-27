@@ -1,0 +1,76 @@
+server:
+  port: 2001
+
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: c8a7c3d1-d484-4ab1-a31d-9116e30a1ecd # 此为命名空间seata生成的id
+#   file.conf 中 vgroup_mapping 的 key 值为 my_test_tx_group：service { vgroup_mapping.my_test_tx_group = "default"}
+#  则 yml 中 tx-service-group 的值也必须为 my_test_tx_group；此配置是针对Seata 1.0之前的配置
+#    alibaba:
+#      seata:
+#        tx-service-group: my_test_tx_group
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order
+    username: root
+    password: root
+
+# 1.0新添加的enabled激活自动配置，使得我们可以在yaml/properties文件中配置，
+# 避免了以前需要客户端引入2个文件：
+# file.conf 和 registry.conf
+seata:
+  enabled: true #1.0新特性，需要依赖seata-spring-boot-starter,默认为true
+  application-id: ${spring.application.name} # Seata 应用编号，默认为 ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group  # Seata 事务组编号，用于 TC 集群名
+  enable-auto-data-source-proxy: true #at模式下数据源自动代理
+  # Seata 服务配置项，对应 ServiceProperties 类
+  service:
+    # 虚拟组和分组的映射
+    vgroup-mapping:
+      seata-order-service-group: default
+  #  Seata 配置中心配置项，对应 ConfigNacosProperties 类
+  config:
+    type: nacos
+    nacos:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: c8a7c3d1-d484-4ab1-a31d-9116e30a1ecd # 此为命名空间seata生成的id
+      username: nacos
+      password: nacos
+      dataId: "seataServer.properties" # 此配置需要在nacos上新建对应的配置，内容为config.txt中的内容
+  # Seata 注册中心配置项，对应 RegistryProperties 类
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      cluster: default
+      namespace: c8a7c3d1-d484-4ab1-a31d-9116e30a1ecd
+      username: nacos
+      password: nacos
+  client:
+    rm:
+      report-success-enable: false
+    support:
+      spring:
+        datasource-autoproxy: false
+
+feign:
+  hystrix:
+    enabled: false
+  httpclient:
+    connection-timeout: 10000
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml

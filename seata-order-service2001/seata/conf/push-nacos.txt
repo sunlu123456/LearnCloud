@@ -1,0 +1,4 @@
+这条指令是通过 nacos-config.sh 脚本将 seata/config.txt 中的配置导入到 nacos 中。
+进入到seata\conf目录，使用git控制台或linux下执行命令。
+-h -p 指定nacos的端口地址；-g 指定配置的分组，-t 指定命名空间id
+sh nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -t 5a3c7d6c-f497-4d68-a71a-2e5e3340b3ca -u nacos -w nacos
